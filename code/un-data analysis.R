@@ -81,10 +81,20 @@ gapminder_data_2007 <-read.csv("code/gapminder_data.csv")%>%
   filter(year == 2007)%>%
   select(country, pop, lifeExp, gdpPercap)
 
-inner_join(co2_emissions, gapminder_data_2007, by = "country")
+joined_co2_pop <- inner_join(co2_emissions, gapminder_data_2007, by = "country")
 
 anti_join(co2_emissions, gapminder_data_2007, by = "country")
 
 anti_join(gapminder_data_2007, co2_emissions, by = "country")
 
-<- full_join(co2_emissions, gapminder_data_2007)
+full_join(co2_emissions, gapminder_data_2007)
+
+# which join is most appropriate? linear model of per_capita vs gdpPercap; should not use a full join or anti join;
+#will use inner join!
+
+joined_co2_pop <- inner_join(co2_emissions, gapminder_data_2007, by = "country")
+
+#writing a CSV
+
+write_csv(joined_co2_pop, file = "data/joined_co2_pop.csv")
+
