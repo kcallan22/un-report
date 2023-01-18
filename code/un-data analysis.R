@@ -98,3 +98,32 @@ joined_co2_pop <- inner_join(co2_emissions, gapminder_data_2007, by = "country")
 
 write_csv(joined_co2_pop, file = "data/joined_co2_pop.csv")
 
+#read just written csv under new name?
+
+joined_co2_pop_new <- read_csv("data/joined_co2_pop.csv")
+
+#MAKE HISTOGRAM for both gdpPercap and LifeExp, separately, to explore variables distributions
+
+joined_co2_pop_new%>%
+  ggplot(aes(x=gdpPercap)) +
+  geom_histogram()
+
+# GOAL: find relationship between Co2 and GDP
+
+gdp_co2_plot <- joined_co2_pop_new%>%
+  ggplot(aes(x = gdpPercap, y = per_capita_emissions)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "GDP Per Capita", y = "CO2 Emissions Per Capita (metric tons)", title = "Comparing Per Capita CO2 emissions and GDP") +
+  theme_classic() +
+  ggpubr::stat_regline_equation(aes(label = ..rr.label..))
+
+ggsave(gdp_co2_plot, filename = "figures/gdp_vs_co2_plot.png", 
+       height = 4, width = 6, units = "in", 
+       dpi = 300)
+
+install.packages("ggpubr")
+        
+ggsave(gdp_co2_plot, filename = "figures/gdp_vs_co2_plot.png", 
+       height = 4, width = 6, units = "in", 
+       dpi = 300)
