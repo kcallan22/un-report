@@ -52,7 +52,8 @@ maxGDP <- gapminder_1997 %>%
 ```
 
 The number of countries in the dataset is `r nCountries`.
-The minimum GDP is 'r minGDP' and the maximum GDP is 'r maxGDP'.
+The minimum GDP is `r minGDP` and the maximum GDP is `r maxGDP`.
+
 
 
 
